@@ -9,7 +9,7 @@ import com.epignosishq.epignosistest.model.BoringActivity
 import kotlinx.android.synthetic.main.boring_activity_item.view.*
 
 class BoringActivityAdapter() : RecyclerView.Adapter<BoringActivityAdapter.ActivityViewHolder>() {
-    private var activities: List<BoringActivity> = listOf()
+    private var activities: MutableList<BoringActivity> = mutableListOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ActivityViewHolder {
         return ActivityViewHolder(
@@ -24,13 +24,13 @@ class BoringActivityAdapter() : RecyclerView.Adapter<BoringActivityAdapter.Activ
             holder.bind(activities[position])
     }
 
-    fun setList(activities: List<BoringActivity>) {
+    fun setList(activities: MutableList<BoringActivity>) {
         this.activities = activities
         notifyDataSetChanged()
     }
 
     fun addActivity(activity: BoringActivity) {
-        activities.plus(activity)
+        activities.add(activity)
         notifyItemInserted(activities.size - 1)
     }
 
