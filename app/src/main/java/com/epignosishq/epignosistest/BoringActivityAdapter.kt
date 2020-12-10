@@ -27,6 +27,6 @@ class BoringActivityAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() 
 
     fun addActivity(activity: BoringActivity) {
         activities.plus(activity)
-        notifyItemInserted(activities.size)
+        notifyItemInserted(activities.size - 1)
     }
 }
