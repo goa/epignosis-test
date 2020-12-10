@@ -26,13 +26,18 @@ class MainActivity : AppCompatActivity() {
 
         setRecyclerViewAdapter()
 
+        setRetrofitService()
+
+        getActivityFromService()
+    }
+
+    private fun setRetrofitService() {
         val retrofit = Retrofit.Builder()
             .baseUrl("https://www.boredapi.com/api/")
             .addConverterFactory(MoshiConverterFactory.create())
             .build()
 
-        service  = retrofit.create(BoredApiService::class.java)
-        getActivityFromService()
+        service = retrofit.create(BoredApiService::class.java)
     }
 
     private fun getActivityFromService() {
