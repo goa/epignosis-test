@@ -1,6 +1,7 @@
 package com.epignosishq.epignosistest
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.epignosis.epignosistest.R
@@ -22,5 +23,10 @@ class BoringActivityAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() 
     fun setList(activities: List<BoringActivity>) {
         this.activities = activities
         notifyDataSetChanged()
+    }
+
+    fun addActivity(activity: BoringActivity) {
+        activities.plus(activity)
+        notifyItemInserted(activities.size)
     }
 }
