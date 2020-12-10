@@ -6,13 +6,14 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.epignosis.epignosistest.R
 import com.epignosishq.epignosistest.model.BoringActivity
+import kotlinx.android.synthetic.main.boring_activity_item.view.*
 
 class BoringActivityAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private var activities: List<BoringActivity> = listOf()
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.activity_item, parent, false)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ActivityViewHolder {
+        return ActivityViewHolder(LayoutInflater.from(parent.context)
+            .inflate(R.layout.boring_activity_item, parent, false))
     }
 
     override fun getItemCount() = activities.size
@@ -28,5 +29,11 @@ class BoringActivityAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() 
     fun addActivity(activity: BoringActivity) {
         activities.plus(activity)
         notifyItemInserted(activities.size - 1)
+    }
+}
+
+class ActivityViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
+    fun bind(itemView: View, activity: BoringActivity) {
+        itemView.activity_name.text = activity.activity
     }
 }
