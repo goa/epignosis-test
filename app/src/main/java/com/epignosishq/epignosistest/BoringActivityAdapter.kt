@@ -29,6 +29,8 @@ class BoringActivityAdapter() : RecyclerView.Adapter<BoringActivityAdapter.Activ
         notifyDataSetChanged()
     }
 
+    fun getList() = activities.toList()
+
     fun addActivity(activity: BoringActivity) {
         activities.add(activity)
         notifyItemInserted(activities.size - 1)

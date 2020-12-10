@@ -1,12 +1,14 @@
 package com.epignosishq.epignosistest
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.epignosis.epignosistest.R
 import com.epignosishq.epignosistest.model.BoringActivity
+import com.squareup.moshi.JsonAdapter
+import com.squareup.moshi.Moshi
 import kotlinx.android.synthetic.main.activity_main.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -66,5 +68,29 @@ class MainActivity : AppCompatActivity() {
             layoutManager = LinearLayoutManager(context)
             adapter = boringActivityAdapter
         }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        // save list in local storage
+        cacheList()
+    }
+
+    private fun cacheList() {
+        // serialize to Json list
+        val jsonList = serializeListToJson(boringActivityAdapter.getList())
+        jsonList?.let { jsonList ->
+            val filename = "boringActCache"
+            applicationContext.openFileOutput(filename, Context.MODE_PRIVATE).use { fos ->
+                fos.write(jsonList.toByteArray())
+            }
+        }
+    }
+
+    private fun serializeListToJson(list: List<BoringActivity>): String? {
+        val moshi = Moshi.Builder().build()
+        val jsonAdapter: JsonAdapter<List<*>> =
+            moshi.adapter(List::class.java)
+        return jsonAdapter.toJson(list)
     }
 }
