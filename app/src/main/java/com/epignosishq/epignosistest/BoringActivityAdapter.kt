@@ -16,6 +16,11 @@ class BoringActivityAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() 
 
     override fun getItemCount() = activities.size
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        
+
+    }
+
+    fun setList(activities: List<BoringActivity>) {
+        this.activities = activities
+        notifyDataSetChanged()
     }
 }
